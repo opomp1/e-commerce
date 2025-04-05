@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Local environment variables
+.env
+.env.local
+
+# Log files
+*.log
+
+# Vite cache
+.vite/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
