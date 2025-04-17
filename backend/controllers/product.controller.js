@@ -22,7 +22,7 @@ export const getFeaturedProducts = async (req, res) => {
 
     // if not in redis, fetch from mongodb
     // .lean() return plain js object instead of mongoDB document for peformance
-    featuredProducts = await Product.find({ isFeature: true }).lean();
+    featuredProducts = await Product.find({ isFeatured: true }).lean();
 
     if (!featuredProducts) {
       return res.status(404).json({ message: "No featured products found" });
@@ -68,7 +68,7 @@ export const getProductsByCategory = async (req, res) => {
 
   try {
     const products = await Product.find({ category });
-    res.json(products);
+    res.json({ products });
   } catch (error) {
     console.error("Error in getProductsByCategory controller:", error);
     res.status(500).json({ message: "Server error", error: error.message });
@@ -134,7 +134,7 @@ export const deleteProduct = async (req, res) => {
 
 async function updateFeaturedProductsCache() {
   try {
-    const featuredProducts = await Product.find({ isFeature: true }).lean();
+    const featuredProducts = await Product.find({ isFeatured: true }).lean();
 
     await redis.set("featured_products", JSON.stringify(featuredProducts));
   } catch (error) {
@@ -147,15 +147,15 @@ export const toggleFeaturedProduct = async (req, res) => {
   try {
     const product = await Product.findById(productId);
 
-    if (product) {
-      product.isFeature = !product.isFeature;
-      const updatedProduct = await product.save();
-
-      await updateFeaturedProductsCache();
-      res.json(updatedProduct);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
 
-    return res.status(404).json({ message: "Product not found" });
+    product.isFeatured = !product.isFeatured;
+    const updatedProduct = await product.save();
+
+    await updateFeaturedProductsCache();
+    return res.json(updatedProduct);
   } catch (error) {
     console.error("Error in toggleFeaturedProduct controller:", error);
     res.status(500).json({ message: "Server error", error: error.message });
