@@ -67,7 +67,7 @@ export const useUserStore = create((set, get) => ({
 
       set({ user: res.data });
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Something went wrong");
+      // toast.error(error?.response?.data?.message || "Something went wrong");
       set({ user: null });
       console.log(error);
     } finally {
