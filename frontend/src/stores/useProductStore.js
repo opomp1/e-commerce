@@ -94,7 +94,7 @@ export const useProductStore = create((set, get) => ({
 
       set((prevState) => ({
         products: prevState.products.map((product) =>
-          product._id == productId
+          product._id === productId
             ? { ...product, isFeatured: isFeatured }
             : product
         ),

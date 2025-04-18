@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
 import { Trash, Star } from "lucide-react";
-import { useProductStore } from "../../store/useProductStore";
+import { useProductStore } from "../stores/useProductStore";
 import { useEffect } from "react";
 
 const ProductsList = () => {
   const { deleteProduct, toggleFeaturedProduct, products } = useProductStore();
-
-  console.log(products);
 
   return (
     <motion.div
