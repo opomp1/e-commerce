@@ -1,8 +1,14 @@
 import { Minus, Plus, Trash } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
+import toast from "react-hot-toast";
 
 const CartItem = ({ item }) => {
   const { removeFromCart, updateQuantity } = useCartStore();
+
+  const handleRemoveFromCart = (productId) => {
+    removeFromCart(productId);
+    toast.success("Product removed from cart");
+  };
 
   return (
     <div className="rounded-lg border p-4 shadow-sm border-gray-700 bg-gray-800 md:p-6">
@@ -55,7 +61,7 @@ const CartItem = ({ item }) => {
             <button
               className="inline-flex items-center text-sm font-medium text-red-400
 							 hover:text-red-300 hover:underline"
-              onClick={() => removeFromCart(item._id)}
+              onClick={() => handleRemoveFromCart(item._id)}
             >
               <Trash />
             </button>

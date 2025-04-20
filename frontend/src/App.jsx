@@ -8,11 +8,13 @@ import SignUpPage from "./Pages/SignUpPage";
 import LoginPage from "./Pages/LoginPage";
 import AdminPage from "./Pages/AdminPage";
 import LoadingSpinner from "./components/LoadingSpinner";
+import CategoryPage from "./Pages/CategoryPage";
+import CartPage from "./Pages/CartPage";
+import PurchaseSuccessPage from "./Pages/PurchaseSuccessPage";
+import PurchaseCancelPage from "./Pages/PurchaseCancelPage";
 
 import { useUserStore } from "./stores/useUserStore";
-import CategoryPage from "./Pages/CategoryPage";
 import { useCartStore } from "./stores/useCartStore";
-import CartPage from "./Pages/CartPage";
 
 const App = () => {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -62,6 +64,14 @@ const App = () => {
           <Route
             path="/cart"
             element={user ? <CartPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/purchase-success"
+            element={user ? <PurchaseSuccessPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/purchase-cancel"
+            element={user ? <PurchaseCancelPage /> : <Navigate to="/" />}
           />
         </Routes>
       </div>

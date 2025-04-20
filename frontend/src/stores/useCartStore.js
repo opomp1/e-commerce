@@ -6,8 +6,38 @@ import Product from "../../../backend/models/product.model";
 export const useCartStore = create((set, get) => ({
   cart: [],
   coupon: null,
+  isCouponApplied: false,
   total: 0,
   subtotal: 0,
+
+  getMyCoupon: async () => {
+    try {
+      const response = await axiosInstance.get("/coupons");
+      set({ coupon: response.data });
+    } catch (error) {
+      console.error("Error fetching coupon:", error);
+    }
+  },
+
+  applyCoupon: async (code) => {
+    try {
+      const response = await axiosInstance.post("/coupons/validate", { code });
+      set({ coupon: response.data, isCouponApplied: true });
+
+      get().calculateTotals();
+
+      toast.success("Coupon applied successfully");
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Failed to apply coupon");
+      console.log(error);
+    }
+  },
+
+  removeCoupon: () => {
+    set({ coupon: null, isCouponApplied: false });
+    get().calculateTotals();
+    toast.success("Coupon removed!");
+  },
 
   getCartItems: async () => {
     try {
@@ -22,6 +52,11 @@ export const useCartStore = create((set, get) => ({
 
   getCartCount: () => {
     return get().cart.reduce((sum, item) => sum + item.quantity, 0);
+  },
+
+  clearCart: async () => {
+    set({ cart: [], coupon: null, total: 0, subtotal: 0 });
+    get().removeFromCart();
   },
 
   addToCart: async (product) => {
@@ -56,7 +91,7 @@ export const useCartStore = create((set, get) => ({
         cart: prevState.cart.filter((item) => item._id !== productId),
       }));
       get().calculateTotals();
-      toast.success("Product removed from cart");
+      // toast.success("Product removed from cart");
     } catch (error) {
       console.error(error);
     }
@@ -65,6 +100,7 @@ export const useCartStore = create((set, get) => ({
   updateQuantity: async (productId, quantity) => {
     if (quantity === 0) {
       get().removeFromCart(productId);
+      toast.success("Product removed from cart");
       return;
     }
 

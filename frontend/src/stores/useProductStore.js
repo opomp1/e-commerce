@@ -63,6 +63,18 @@ export const useProductStore = create((set, get) => ({
     }
   },
 
+  fetchFeaturedProducts: async () => {
+    set({ loading: true });
+    try {
+      const response = await axiosInstance.get("/products/featured");
+      set({ products: response.data });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   deleteProduct: async (productId) => {
     set({ loading: true });
     try {
