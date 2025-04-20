@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 import { BarChart, PlusCircle, ShoppingBasket } from "lucide-react";
-import CreateProductTab from "../components/admin/CreateProductTab";
-import ProductsList from "../components/admin/ProductsList";
-import AnalyticsTab from "../components/admin/AnalyticsTab";
-import { useProductStore } from "../store/useProductStore";
+import CreateProductTab from "../admin/CreateProductTab";
+import ProductsList from "../admin/ProductsList";
+import AnalyticsTab from "../admin/AnalyticsTab";
+import { useProductStore } from "../stores/useProductStore";
 
 const tabs = [
   { id: "create", label: "Create Product", icon: PlusCircle },

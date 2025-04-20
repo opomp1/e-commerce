@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { UserPlus, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 
-import Input from "../components/auth/Input";
-import { useUserStore } from "../store/useUserStore";
+import Input from "../components/Input";
+import { useUserStore } from "../stores/useUserStore";
 
 const SignUpPage = () => {
-  const { signup, user, loading } = useUserStore();
+  const { signup, loading } = useUserStore();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,7 +49,7 @@ const SignUpPage = () => {
     signup(formData);
   };
   return (
-    <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex flex-col justify-center py-12 px-6 lg:px-8">
       <motion.div
         className="sm:mx-auto sm:w-full sm:max-w-md"
         initial={{ opacity: 0, y: -20 }}
@@ -67,7 +67,7 @@ const SignUpPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-gray-800 py-8 px-4 shadow rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               field="fullname"
@@ -121,13 +121,19 @@ const SignUpPage = () => {
             </button>
           </form>
 
-          <p className="mt-8 text-center text-sm text-gray-400">
+          <p className="mt-4 text-center text-sm text-gray-400">
+            By creating an account you are agreeing to CoinSpot's{" "}
+            <a href="#" className="text-blue-400">
+              Terms and conditions
+            </a>
+          </p>
+          <p className="mt-1 text-center text-sm text-gray-400">
             Already have an account?{" "}
             <Link
               to="/login"
               className="font-medium text-emerald-400 hover:text-emerald-300"
             >
-              Login here <ArrowRight className="inline h-4 w-4" />
+              Sign in here <ArrowRight className="inline h-4 w-4" />
             </Link>
           </p>
         </div>

@@ -8,16 +8,27 @@ import SignUpPage from "./Pages/SignUpPage";
 import LoginPage from "./Pages/LoginPage";
 import AdminPage from "./Pages/AdminPage";
 import LoadingSpinner from "./components/LoadingSpinner";
-
-import { useUserStore } from "./store/useUserStore";
 import CategoryPage from "./Pages/CategoryPage";
+import CartPage from "./Pages/CartPage";
+import PurchaseSuccessPage from "./Pages/PurchaseSuccessPage";
+import PurchaseCancelPage from "./Pages/PurchaseCancelPage";
+
+import { useUserStore } from "./stores/useUserStore";
+import { useCartStore } from "./stores/useCartStore";
 
 const App = () => {
   const { user, checkAuth, checkingAuth } = useUserStore();
+  const { getCartItems } = useCartStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    getCartItems();
+  }, [getCartItems, user]);
 
   if (checkingAuth) {
     return <LoadingSpinner />;
@@ -50,6 +61,18 @@ const App = () => {
             }
           />
           <Route path="/category/:category" element={<CategoryPage />} />
+          <Route
+            path="/cart"
+            element={user ? <CartPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/purchase-success"
+            element={user ? <PurchaseSuccessPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/purchase-cancel"
+            element={user ? <PurchaseCancelPage /> : <Navigate to="/" />}
+          />
         </Routes>
       </div>
 
