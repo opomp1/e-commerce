@@ -1,13 +1,13 @@
 # 🛒 ShopMe – E-Commerce Website
 
-**ShopMe** is a full-stack e-commerce application where users can browse and purchase products, and administrators can manage inventory, monitor sales, and feature products. The app includes secure JWT-based authentication, Stripe payment integration, and a responsive UI for a seamless user experience.
+**ShopMe** is a full-stack e-commerce application where users can browse and purchase products, and administrators can monitor sales, and feature products. The app includes secure JWT-based authentication, Stripe payment integration, and a responsive UI for a seamless user experience.
 
 ---
 
 ## 🚀 Features
 
 - 🛍️ Users can add/remove items from their cart and securely checkout using Stripe
-- 📦 Admin dashboard to create, edit, feature, or delete products
+- 📦 Admin dashboard to create, feature, or delete products
 - 📈 Revenue and sales insights displayed with Recharts
 - 🖼️ Product image uploads via Cloudinary
 - 🔐 Secure authentication and refresh token system with Redis (Upstash)
