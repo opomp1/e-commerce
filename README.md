@@ -37,6 +37,20 @@ Recharts
 
 ---
 
+## 🧪 Demo Accounts
+
+Use these demo credentials to explore the app:
+
+### 👩‍💼 Admin Login
+- **Email**: admin@shopme.com
+- **Password**: test1234
+
+Access admin dashboard, manage products, and view sales insights.
+
+👉 [Live Demo](https://e-commerce-8w6v.onrender.com)
+
+---
+
 ## 📦 Installation
 
 Make sure you have Node.js, npm, and MongoDB installed.
