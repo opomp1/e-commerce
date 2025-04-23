@@ -67,7 +67,7 @@ const ProductsList = () => {
                     />
                   </div>
 
-                  <div className="text-sm font-medium text-white ml-4 truncate w-10">
+                  <div className="text-sm font-medium flex-grow text-white ml-4 truncate w-10">
                     {product.name}
                   </div>
                 </div>
