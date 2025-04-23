@@ -45,7 +45,7 @@ Make sure you have Node.js, npm, and MongoDB installed.
 
 ```bash
 git clone https://github.com/opomp1/e-commerce.git
-cd e-commerce
+cd shopme
 ```
 
 ### 2. Install Backend Dependencies
