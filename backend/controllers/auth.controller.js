@@ -40,12 +40,17 @@ const setCookies = (res, accessToken, refreshToken) => {
 };
 
 export const signup = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, confirmPassword } = req.body;
 
   try {
     const userExists = await User.findOne({ email });
+
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Password do not match" });
     }
 
     const user = await User.create({ name, email, password });
@@ -57,12 +62,10 @@ export const signup = async (req, res) => {
     setCookies(res, accessToken, refreshToken);
 
     res.status(201).json({
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
     });
   } catch (error) {
     console.error("Error in signup controller:", error);
@@ -129,7 +132,7 @@ export const refreshToken = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
-      return res.status(401).json({ message: "No refresh token provided" });
+      return res.status(400).json({ message: "No refresh token provided" });
     }
 
     const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
@@ -138,7 +141,7 @@ export const refreshToken = async (req, res) => {
     if (storedToken !== refreshToken) {
       await redis.del(`refresh_token:${decoded.userId}`); // Remove invalid token
       res.clearCookie("refreshToken");
-      return res.status(401).json({ message: "Invalid refresh token" });
+      return res.status(400).json({ message: "Invalid refresh token" });
     }
 
     const accessToken = jwt.sign(
