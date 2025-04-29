@@ -56,7 +56,7 @@ const SignUpPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-emerald-400">
+        <h2 className="mt-6 text-center text-3xl font-extrabold">
           Create your account
         </h2>
       </motion.div>
@@ -67,7 +67,7 @@ const SignUpPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="bg-gray-800 py-8 px-4 shadow rounded-lg sm:px-10">
+        <div className="py-8 px-4 shadow-lg border border-gray-200 rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               field="fullname"
@@ -99,7 +99,7 @@ const SignUpPage = () => {
             <button
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent 
-							rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600
+							rounded-md shadow-sm text-sm font-medium text-white bg-emerald-500
 							 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2
 							  focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50"
               disabled={loading}
@@ -123,7 +123,7 @@ const SignUpPage = () => {
 
           <p className="mt-4 text-center text-sm text-gray-400">
             By creating an account you are agreeing to CoinSpot's{" "}
-            <a href="#" className="text-blue-400">
+            <a href="#" className="text-blue-400 hover:underline">
               Terms and conditions
             </a>
           </p>

@@ -35,11 +35,11 @@ const App = () => {
   }
 
   return (
-    <div className="relative min-h-[100svh] bg-gray-900 text-white">
+    <div className="relative min-h-[100svh] bg-white text-black font-display">
       {/* Background gradient - make it grow with content */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.3)_0%,rgba(10,80,60,0.2)_45%,rgba(0,0,0,0.1)_100%)]" />
-      </div>
+      </div> */}
 
       {/* Foreground content */}
       <div className="relative z-10 pt-20">
