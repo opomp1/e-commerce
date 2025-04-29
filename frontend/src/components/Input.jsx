@@ -37,10 +37,7 @@ const Input = ({ value, onChange, field, error }) => {
 
   return (
     <div>
-      <label
-        htmlFor={config.id}
-        className="block text-sm font-medium text-gray-300"
-      >
+      <label htmlFor={config.id} className="block text-sm font-medium ">
         {config.label}
       </label>
       <div className="mt-1 relative rounded-md shadow-sm">
@@ -53,7 +50,7 @@ const Input = ({ value, onChange, field, error }) => {
           required
           value={value}
           onChange={onChange}
-          className="block w-full px-3 py-2 pl-10 bg-gray-700 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-base"
+          className="block w-full px-3 py-2 pl-10  rounded-md placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-base"
           placeholder={config.placeholder}
         />
       </div>

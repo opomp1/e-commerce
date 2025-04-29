@@ -16,16 +16,18 @@ export const useUserStore = create((set, get) => ({
       set({ loading: false });
       return;
     }
+
     try {
       const res = await axiosInstance.post("/auth/signup", data);
-
-      set({ user: res.data.user });
-
-      toast.success("Account created successfully");
+      if (res.data) {
+        set({ user: res.data });
+        toast.success("Account created successfully");
+      }
     } catch (error) {
       toast.error(error?.response?.data?.message || "Something went wrong");
-      set({ user: null });
-      console.log(error);
+      console.error("Full error object:", error);
+      console.log("error.response:", error.response);
+      console.log("error.response.data:", error?.response?.data);
     } finally {
       set({ loading: false });
     }
@@ -53,6 +55,7 @@ export const useUserStore = create((set, get) => ({
     try {
       await axiosInstance.post("/auth/logout");
       set({ user: null });
+      toast.success("Logout successful");
     } catch (error) {
       toast.error(
         error?.response?.data?.message || "An error occurred during logout"
@@ -64,7 +67,6 @@ export const useUserStore = create((set, get) => ({
     set({ checkingAuth: true });
     try {
       const res = await axiosInstance.get("/auth/profile");
-
       set({ user: res.data });
     } catch (error) {
       // toast.error(error?.response?.data?.message || "Something went wrong");
@@ -77,7 +79,7 @@ export const useUserStore = create((set, get) => ({
 
   refreshToken: async () => {
     // prevent multiple simultaneous refresh attempts
-    if (get().checkingAuth) return;
+    if (get().checkingAuth && refreshPromise) return;
 
     set({ checkingAuth: true });
     try {

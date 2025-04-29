@@ -8,51 +8,51 @@ const ProductsList = () => {
 
   return (
     <motion.div
-      className="bg-gray-800 shadow-lg rounded-lg overflow-hidden max-w-4xl mx-auto"
+      className="shadow-lg rounded-lg border border-gray-400 overflow-x-auto max-w-4xl mx-auto"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <table className=" min-w-full divide-y divide-gray-700">
-        <thead className="bg-gray-700">
+      <table className="table-fixed min-w-full divide-y divide-gray-400">
+        <thead className="">
           <tr>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider w-full"
             >
               Product
             </th>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider text-right"
             >
               Price
             </th>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"
             >
               Category
             </th>
 
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"
             >
               Featured
             </th>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider"
+              className="px-2 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider"
             >
               Actions
             </th>
           </tr>
         </thead>
 
-        <tbody className="bg-gray-800 divide-y divide-gray-700">
+        <tbody className=" divide-y divide-gray-200">
           {products?.map((product) => (
-            <tr key={product._id} className="hover:bg-gray-700">
+            <tr key={product._id} className="hover:bg-gray-200">
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">
@@ -67,35 +67,33 @@ const ProductsList = () => {
                     />
                   </div>
 
-                  <div className="text-sm font-medium flex-grow text-white ml-4 truncate w-10">
+                  <div className="text-sm font-medium flex-grow text-gray-800 ml-4 truncate w-10">
                     {product.name}
                   </div>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-300">
+                <div className="text-sm text-gray-800 text-right">
                   ${product.price.toFixed(2)}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-300">{product.category}</div>
+                <div className="text-sm text-gray-800">{product.category}</div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-2 py-4  whitespace-nowrap ">
                 <button
                   onClick={() => toggleFeaturedProduct(product._id)}
-                  className={`p-1 rounded-full cursor-pointer ${
-                    product.isFeatured
-                      ? "bg-yellow-400 text-gray-900"
-                      : "bg-gray-600 text-gray-300"
+                  className={`p-1 rounded-full cursor-pointer text-gray-800 ${
+                    product.isFeatured ? "bg-yellow-400  " : "border "
                   } hover:bg-yellow-500 transition-colors duration-200`}
                 >
                   <Star className="h-5 w-5" />
                 </button>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <td className="px-2 py-4 whitespace-nowrap text-sm font-medium">
                 <button
                   onClick={() => deleteProduct(product._id)}
-                  className="text-red-400 hover:text-red-300 cursor-pointer"
+                  className="text-red-600 hover:text-red-400 cursor-pointer"
                 >
                   <Trash className="h-5 w-5" />
                 </button>
